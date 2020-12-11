@@ -36,6 +36,9 @@ plot_volume_recalc_two_breakpoints <- function(df,
   }else if(chart_typ == "P'"){
     pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'pp', multiply = 100)
     pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'pp', multiply = 100)
+  }else if(chart_typ == "P"){
+    pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'p', multiply = 100)
+    pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'p', multiply = 100)
   }
   
   #calculate limits for first 21 points - solid lines
@@ -63,6 +66,8 @@ plot_volume_recalc_two_breakpoints <- function(df,
                                     chart = 'up') 
   }else if(chart_typ == "P'"){
     pct_ruleBreak <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint:end_point,], chart = 'pp', multiply = 100)
+  }else if(chart_typ == "P"){
+    pct_ruleBreak <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint:end_point,], chart = 'p', multiply = 100)
   }
   
   pct_ruleBreak <- pct_ruleBreak$data %>%
@@ -92,6 +97,8 @@ plot_volume_recalc_two_breakpoints <- function(df,
                                      chart = 'up')
   }else if(chart_typ == "P'"){
     pct_ruleBreak2 <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint2:end_point2,], chart = 'pp', multiply = 100)
+  }else if(chart_typ == "P"){
+    pct_ruleBreak2 <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint2:end_point2,], chart = 'p', multiply = 100)
   }
   
   pct_ruleBreak2 <- pct_ruleBreak2$data %>%
@@ -124,8 +131,10 @@ plot_volume_recalc_two_breakpoints <- function(df,
 
   if(chart_typ == "C" | chart_typ == "C'"){
     ylimhigh <- max(df$value) + max(df$value)/10 +10
-  }else if(chart_typ == "P'"){
+    ytitle <- "Number"
+  }else if(chart_typ == "P" | chart_typ == "P'"){
     ylimhigh <- 100
+    ytitle <- "Percentage"
   }
 
   cl_start <- round(cht_data$cl[1])
@@ -137,7 +146,7 @@ plot_volume_recalc_two_breakpoints <- function(df,
       scale_x_date(labels = date_format("%Y-%m-%d"), breaks = seq(st.dt, ed.dt, 7),
                    limits = c(st.dt, ed.dt)) +
       ggtitle(cht_title, subtitle = place_title) +
-      labs(x = "Day", y = ifelse(chart_typ == "P'", "Percentage","Number"),
+      labs(x = "Day", y = ytitle,
            caption = paste(chart_typ,"Shewhart Chart.","\n*Shewhart chart rules apply (see Understanding the Analysis tab for more detail) \nRule 1: Any month outside the control limits \nRule 2: Eight or more consecutive months all above, or all below, the centre line"),
            size = 10) +
       scale_y_continuous(limits = c(ylimlow, ylimhigh),
