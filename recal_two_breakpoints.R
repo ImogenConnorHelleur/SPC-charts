@@ -147,7 +147,7 @@ plot_volume_recalc_two_breakpoints <- function(df,
                    limits = c(st.dt, ed.dt)) +
       ggtitle(cht_title, subtitle = place_title) +
       labs(x = "Day", y = ytitle,
-           caption = paste(chart_typ,"Shewhart Chart.","\n*Shewhart chart rules apply (see Understanding the Analysis tab for more detail) \nRule 1: Any month outside the control limits \nRule 2: Eight or more consecutive months all above, or all below, the centre line"),
+           caption = paste(chart_typ,"Shewhart Chart.","\n*Shewhart chart rules apply (see Understanding the Analysis tab for more detail) \nRule 1: Any point outside the control limits \nRule 2: Eight or more consecutive points all above, or all below, the centre line"),
            size = 10) +
       scale_y_continuous(limits = c(ylimlow, ylimhigh),
                          breaks = breaks_pretty(),
