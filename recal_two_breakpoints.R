@@ -18,7 +18,9 @@ plot_volume_recalc_two_breakpoints <- function(df,
                                           breakPoint = nrow(df),
                                           breakPoint2 = nrow(df),
                                           chart_typ = "C",
-                                          plot_chart = T
+                                          plot_chart = T,
+                                          exclude = NULL,
+                                          override_y_lim = NULL
 ) { 
   
   
@@ -28,17 +30,17 @@ plot_volume_recalc_two_breakpoints <- function(df,
   ed.dt <- max(df$date)
   
   if(chart_typ == "C"){
-    pct_firstPeriod <- qicharts2::qic(date, value, data = df[1:21,], chart = 'c') 
-    pct_full <- qicharts2::qic(date, value, data = df, chart = 'c')
+    pct_firstPeriod <- qicharts2::qic(date, value, data = df[1:21,], chart = 'c', exclude = exclude) 
+    pct_full <- qicharts2::qic(date, value, data = df, chart = 'c', exclude = exclude)
   }else if(chart_typ == "C'"){
-    pct_firstPeriod <- qicharts2::qic(date, value, n = rep(1, 21), data = df[1:21,], chart = 'up') 
-    pct_full <- qicharts2::qic(date, value, n = rep(1, nrow(df)), data = df, chart = 'up')
+    pct_firstPeriod <- qicharts2::qic(date, value, n = rep(1, 21), data = df[1:21,], chart = 'up', exclude = exclude) 
+    pct_full <- qicharts2::qic(date, value, n = rep(1, nrow(df)), data = df, chart = 'up', exclude = exclude)
   }else if(chart_typ == "P'"){
-    pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'pp', multiply = 100)
-    pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'pp', multiply = 100)
+    pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'pp', multiply = 100, exclude = exclude)
+    pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'pp', multiply = 100, exclude = exclude)
   }else if(chart_typ == "P"){
-    pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'p', multiply = 100)
-    pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'p', multiply = 100)
+    pct_firstPeriod <- qicharts2::qic(date, nonBreach, n = total, data = df[1:21,], chart = 'p', multiply = 100, exclude = exclude)
+    pct_full <- qicharts2::qic(date, nonBreach, n = total, data = df, chart = 'p', multiply = 100, exclude = exclude)
   }
   
   #calculate limits for first 21 points - solid lines
@@ -135,6 +137,10 @@ plot_volume_recalc_two_breakpoints <- function(df,
   }else if(chart_typ == "P" | chart_typ == "P'"){
     ylimhigh <- 100
     ytitle <- "Percentage"
+  }
+  
+  if(!is.null(override_y_lim)){
+    ylimhigh <- override_y_lim
   }
 
   cl_start <- round(cht_data$cl[1])
