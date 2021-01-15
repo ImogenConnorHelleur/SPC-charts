@@ -20,13 +20,15 @@ plot_volume_recalc_three_breakpoints <- function(df,
                                                breakPoint3 = nrow(df),
                                                chart_typ = "C",
                                                plot_chart = T,
+                                               write_table = F,
                                                exclude = NULL,
                                                exclude2 = NULL,
                                                exclude3 = NULL,
                                                exclude4 = NULL,
                                                override_y_lim = NULL,
                                                override_annotation_dist = 10,
-                                               override_annotation_dist_P = 25
+                                               override_annotation_dist_P = 25,
+                                               df_name = df
 ) { 
   
   
@@ -212,6 +214,10 @@ plot_volume_recalc_three_breakpoints <- function(df,
       annotate("text", x=st.dt, y=cl_start + cl_start/annotation_dist_fact, label = cl_start) +
       annotate("text", x=ed.dt, y=cl_end + cl_start/annotation_dist_fact, label = cl_end)
 
+  }else if(write_table == T){
+    
+    write.csv(cht_data, paste0("tables/", df_name, ".csv"))
+    
   }else{
     cht_data
   }

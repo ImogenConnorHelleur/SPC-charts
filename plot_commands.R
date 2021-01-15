@@ -139,7 +139,7 @@ plot_volume_recalc_three_breakpoints(cht_title = "COVID Hub and Assessment Centr
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_AA, breakPoint = 25, breakPoint2 = 64, breakPoint3 = 86)
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_borders, place_title = "Borders", breakPoint = 22, breakPoint2 = 85)
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_dg, place_title = "Dumfries and Galloway", breakPoint = 35)
-plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_fife, place_title = "Fife", breakPoint = 38, breakPoint2 = 89, breakPoint2 = 112)
+plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_fife, place_title = "Fife", breakPoint = 38, breakPoint2 = 89, breakPoint3 = 112)
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_forthV, place_title = "Forth Valley", breakPoint = 22, breakPoint2 = 99)
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_gramp, place_title = "Grampian", breakPoint = 24, breakPoint2 = 92)
 plot_volume_recalc_three_breakpoints(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_glow, place_title = "Greater Glasgow and Clyde", breakPoint = 43, breakPoint2 = 92)
