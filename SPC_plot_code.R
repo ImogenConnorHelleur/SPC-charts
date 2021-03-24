@@ -19,6 +19,7 @@ plot_SPC <- function(df,
                      breakPoint2 = nrow(df),
                      breakPoint3 = nrow(df),
                      breakPoint4 = nrow(df),
+                     breakPoint5 = nrow(df),
                      chart_typ = "C",
                      plot_chart = T,
                      write_table = F,
@@ -27,6 +28,7 @@ plot_SPC <- function(df,
                      exclude3 = NULL,
                      exclude4 = NULL,
                      exclude5 = NULL,
+                     exclude6 = NULL,
                      override_y_lim = NULL,
                      override_annotation_dist = 10,
                      override_annotation_dist_P = 25,
@@ -174,9 +176,9 @@ plot_SPC <- function(df,
   pct_recal[end_point3:breakPoint4,"cl"] <- pct_recal[end_point3, "cl"]
   pct_recal[end_point3:breakPoint4,"limitType8"] <- "period extension"
   
-  #####################
+  #############
   
-  #recalculate limits after rule break 2 - solid line
+  #recalculate limits after rule break 4 - solid line
   end_point4 <- min(nrow(df), (breakPoint4+21))
   extension_length4 <- end_point4 - breakPoint4
   
@@ -202,15 +204,54 @@ plot_SPC <- function(df,
     mutate(ucl = ifelse(is.na(ucl), ucl.y, ucl)) %>%
     mutate(lcl = ifelse(is.na(lcl), lcl.y, lcl)) %>%
     mutate(cl = ifelse(is.na(cl), cl.y, cl))%>%
-    select(x, y, ucl, lcl, cl, Limit, limitType2, limitType3, limitType4, limitType5, limitType6, limitType7, limitType8)
+    select(x, y, ucl, lcl, cl, Limit, limitType2, limitType3, limitType4, 
+           limitType5, limitType6, limitType7, limitType8)
   pct_recal[(breakPoint4):end_point4,"limitType9"] <- "new period"
   
   #lock limits afterwards until end - dotted
-  pct_recal[end_point4:nrow(df),"ucl"] <- pct_recal[end_point4, "ucl"]
-  pct_recal[end_point4:nrow(df),"lcl"] <- pct_recal[end_point4, "lcl"]
-  pct_recal[end_point4:nrow(df),"cl"] <- pct_recal[end_point4, "cl"]
-  pct_recal[end_point4:nrow(df),"limitType10"] <- "period extension"
+  pct_recal[end_point4:breakPoint5,"ucl"] <- pct_recal[end_point4, "ucl"]
+  pct_recal[end_point4:breakPoint5,"lcl"] <- pct_recal[end_point4, "lcl"]
+  pct_recal[end_point4:breakPoint5,"cl"] <- pct_recal[end_point4, "cl"]
+  pct_recal[end_point4:breakPoint5,"limitType10"] <- "period extension"
   
+  #####################
+  
+  #recalculate limits after rule break 2 - solid line
+  end_point5 <- min(nrow(df), (breakPoint5+21))
+  extension_length5 <- end_point5 - breakPoint5
+  
+  if(chart_typ == "C"){
+    pct_ruleBreak5 <- qicharts2::qic(date, value, data = df[breakPoint5:end_point5,],
+                                     chart = 'c', exclude = exclude6)
+  }else if(chart_typ == "C'"){
+    pct_ruleBreak5 <- qicharts2::qic(date, value, n = rep(1, (extension_length5+1)), data = df[breakPoint5:end_point5,],
+                                     chart = 'up', exclude = exclude6)
+  }else if(chart_typ == "P'"){
+    pct_ruleBreak5 <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint5:end_point5,], 
+                                     chart = 'pp', multiply = 100, exclude = exclude6)
+  }else if(chart_typ == "P"){
+    pct_ruleBreak5 <- qicharts2::qic(date, nonBreach, n = total, data = df[breakPoint5:end_point5,], 
+                                     chart = 'p', multiply = 100, exclude = exclude6)
+  }
+  
+  pct_ruleBreak5 <- pct_ruleBreak5$data %>%
+    select(x,ucl,lcl, cl)
+  pct_recal <- pct_recal %>%
+    left_join(pct_ruleBreak5, by = "x") %>%
+    rename(ucl = ucl.x, lcl = lcl.x, cl = cl.x) %>%
+    mutate(ucl = ifelse(is.na(ucl), ucl.y, ucl)) %>%
+    mutate(lcl = ifelse(is.na(lcl), lcl.y, lcl)) %>%
+    mutate(cl = ifelse(is.na(cl), cl.y, cl))%>%
+    select(x, y, ucl, lcl, cl, Limit, limitType2, limitType3, limitType4, 
+           limitType5, limitType6, limitType7, limitType8, limitType9, limitType10)
+  pct_recal[(breakPoint5):end_point5,"limitType11"] <- "new period"
+  
+  #lock limits afterwards until end - dotted
+  pct_recal[end_point5:nrow(df),"ucl"] <- pct_recal[end_point5, "ucl"]
+  pct_recal[end_point5:nrow(df),"lcl"] <- pct_recal[end_point5, "lcl"]
+  pct_recal[end_point5:nrow(df),"cl"] <- pct_recal[end_point5, "cl"]
+  pct_recal[end_point5:nrow(df),"limitType12"] <- "period extension"
+  ###########
   
   pct_recal$x <- as.Date(pct_recal$x, tz = 'Europe/London')
   cht_data <- add_rule_breaks(pct_recal)
@@ -301,6 +342,12 @@ format_SPC <- function(cht, r1_col, r2_col, ymin, ymax) {
     geom_line(aes(x,cl, linetype = limitType10), size = 0.75) +
     geom_line(aes(x,ucl, linetype = limitType10), size = 0.75) +
     geom_line(aes(x,lcl, linetype = limitType10), size = 0.75) +
+    geom_line(aes(x,cl, linetype = limitType11), size = 0.75) +
+    geom_line(aes(x,ucl, linetype = limitType11), size = 0.5) +
+    geom_line(aes(x,lcl, linetype = limitType11), size = 0.5) +
+    geom_line(aes(x,cl, linetype = limitType12), size = 0.75) +
+    geom_line(aes(x,ucl, linetype = limitType12), size = 0.75) +
+    geom_line(aes(x,lcl, linetype = limitType12), size = 0.75) +
     geom_point(aes(colour = highlight), size = 2) +
     scale_color_manual("Rule triggered*", values = point_colours) + 
     theme(panel.grid.major.y = element_blank(), panel.grid.major.x = element_line(colour = "grey80"),

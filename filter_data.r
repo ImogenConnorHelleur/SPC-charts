@@ -257,9 +257,16 @@ NHS24_5_9_weekend <- mutate(NHS24_paediatrics_weekend, value = age_5_9)
 NHS24_10_14_weekend <- mutate(NHS24_paediatrics_weekend, value = age_10_14)
 NHS24_15_19_weekend <- mutate(NHS24_paediatrics_weekend, value = age_15_19)
 
-
+self_pres_under_1 <- mutate(self_pres_paediatrics, value = under_1)
+self_pres_under_18_months <- mutate(self_pres_paediatrics, value = under_18_months)
+self_pres_under_12 <- mutate(self_pres_paediatrics, value = under_12)
+self_pres_1_4 <- mutate(self_pres_paediatrics, value = age_1_4)
+self_pres_5_9 <- mutate(self_pres_paediatrics, value = age_5_9)
+self_pres_10_14 <- mutate(self_pres_paediatrics, value = age_10_14)
+self_pres_15_19 <- mutate(self_pres_paediatrics, value = age_15_19)
 
 ED_attendances_under_1 <- mutate(ED_attendances_paediatrics, value = under_1)
+ED_attendances_under_18_months <- mutate(ED_attendances_paediatrics, value = under_18_months)
 ED_attendances_under_12 <- mutate(ED_attendances_paediatrics, value = under_12)
 ED_attendances_1_4 <- mutate(ED_attendances_paediatrics, value = age_1_4)
 ED_attendances_5_9 <- mutate(ED_attendances_paediatrics, value = age_5_9)

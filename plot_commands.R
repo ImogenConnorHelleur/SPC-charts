@@ -67,6 +67,8 @@ plot_SPC(cht_title = "SAS Attended Incidents per Day",chart_typ = "C", df = SAS_
 plot_SPC(cht_title = "SAS Attended Incidents per Day",chart_typ = "C", df = SAS_attended_west, place_title = "Western Isles", breakPoint = 96)
 plot_SPC(cht_title = "SAS Attended Incidents per Day",chart_typ = "C'", df = SAS_attended_scot, place_title = "Scotland", breakPoint = 64)
 
+plot_SPC(cht_title = "SAS Non-Attended Incidents per Day",chart_typ = "C'", df = SAS_not_attended, place_title = "Scotland")
+
 
 plot_SPC(cht_title = "SAS Conveyed Incidents per Day",chart_typ = "C", df = SAS_conveyed_AA, place_title = "Ayrshire and Arran", breakPoint = 128)
 plot_SPC(cht_title = "SAS Conveyed Incidents per Day",chart_typ = "C", df = SAS_conveyed_borders, place_title = "Borders")
@@ -150,7 +152,7 @@ plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPre
 plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_shet, place_title = "Shetland", breakPoint = 113)
 plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_tay, place_title = "Tayside", breakPoint = 29, breakPoint2 = 94, breakPoint3 = 131)
 plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C", df = selfPres_west, place_title = "Western Isles", breakPoint = 75)
-plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C'", df = selfPres_scot, place_title = "Scotland", breakPoint = 22, breakPoint2 = 43, breakPoint3 = 92, breakPoint4 = 128)
+plot_SPC(cht_title = "Self Presenters ALL per Day",chart_typ = "C'", df = selfPres_scot, place_title = "Scotland", breakPoint = 22, breakPoint2 = 43, breakPoint3 = 92, breakPoint4 = 128, breakPoint5 = 168)
 
 
 plot_SPC(cht_title = "ED 4Hr Performance",chart_typ = "P", df = fourHrPerf_AA, place_title = "Ayrshire and Arran", breakPoint = 31, breakPoint2 = 57)
@@ -184,7 +186,7 @@ plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C", df = fourHrPerf_o
 plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C", df = fourHrPerf_shet, place_title = "Shetland", breakPoint = 22)
 plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C", df = fourHrPerf_tay, place_title = "Tayside", breakPoint = 28, breakPoint2 = 92)
 plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C", df = fourHrPerf_west, place_title = "Western Isles", breakPoint = 102)
-plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C'", df = fourHrPerf_scot, place_title = "Scotland", breakPoint = 22, breakPoint2 = 43, breakPoint3 = 106)
+plot_SPC(cht_title = "ED Attendances per Day",chart_typ = "C'", df = fourHrPerf_scot, place_title = "Scotland", breakPoint = 22, breakPoint2 = 43, breakPoint3 = 106, breakPoint4 = 128, breakPoint5 = 168)
 
 
 plot_SPC(cht_title = "Emergency Admissions per Day",chart_typ = "C", df = emerg_ad_AA, place_title = "Ayrshire and Arran", breakPoint = 108)
@@ -254,13 +256,22 @@ plot_SPC(cht_title = "NHS 24 Sat-Sun: Paediatric Contacts per Day",chart_typ = "
 plot_SPC(cht_title = "NHS 24 Sat-Sun: Paediatric Contacts per Day",chart_typ = "C", df = NHS24_15_19_weekend, place_title = "Age: 15-19", breakPoint = 27)
 
 
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_under_1, place_title = "Age: Under 1", breakPoint = 110)
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_under_12, place_title = "Age: Under 12", breakPoint = 38, breakPoint2 = 109)
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_1_4, place_title = "Age: 1-4", breakPoint = 42, breakPoint2 = 113)
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_5_9, place_title = "Age: 5-9", breakPoint = 39, breakPoint2 = 113)
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_10_14, place_title = "Age: 10-14", breakPoint = 39, breakPoint2 = 109)
-plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_15_19, place_title = "Age: 15-19")
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_under_1, place_title = "Age: Under 1", breakPoint = 22, breakPoint2 = 169)
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_under_12, place_title = "Age: Under 12", breakPoint = 38, breakPoint2 = 109, breakPoint3 = 177)
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_under_18_months, place_title = "Age: Under 18 months")
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_1_4, place_title = "Age: 1-4", breakPoint = 42, breakPoint2 = 113, breakPoint3 = 174)
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_5_9, place_title = "Age: 5-9", breakPoint = 39, breakPoint2 = 113, breakPoint3 = 173)
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_10_14, place_title = "Age: 10-14", breakPoint = 39, breakPoint2 = 109, breakPoint3 = 174)
+plot_SPC(cht_title = "Paediatric ED Attendances per Day",chart_typ = "C", df = ED_attendances_15_19, place_title = "Age: 15-19", breakPoint = 37, breakPoint2 = 106, breakPoint3 = 128, breakPoint4 = 158)
 
+
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_under_1, place_title = "Age: Under 1", breakPoint = 22, breakPoint2 = 129, breakPoint3 = 169)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_under_12, place_title = "Age: Under 12", breakPoint = 39, breakPoint2 = 106, breakPoint3 = 128, breakPoint4 = 168)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_under_18_months, place_title = "Age: Under 18 months", breakPoint = 22, breakPoint2 = 129)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_1_4, place_title = "Age: 1-4", breakPoint = 40, breakPoint2 = 103, breakPoint3 = 128, breakPoint4 = 158)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_5_9, place_title = "Age: 5-9", breakPoint = 39, breakPoint2 = 113, breakPoint3 = 173)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_10_14, place_title = "Age: 10-14", breakPoint = 39, breakPoint2 = 108, breakPoint3 = 179)
+plot_SPC(cht_title = "Paediatric ED Self Presenters per Day",chart_typ = "C", df = self_pres_15_19, place_title = "Age: 15-19", breakPoint = 37, breakPoint2 = 92, breakPoint3 = 114, breakPoint4 = 137,breakPoint5 = 159)
 
 plot_SPC(cht_title = "SAS Attended Incidents: Paediatrics per Day",chart_typ = "C", df = SAS_paediatrics_under_1, place_title = "Age: Under 1", breakPoint = 109)
 plot_SPC(cht_title = "SAS Attended Incidents: Paediatrics per Day",chart_typ = "C", df = SAS_paediatrics_under_12, place_title = "Age: Under 12", breakPoint = 113, breakPoint2 = 147)
